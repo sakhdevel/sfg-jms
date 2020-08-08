@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+/**
+ * Created by jt on 2019-07-17.
+ */
 @RequiredArgsConstructor
 @Component
 public class HelloSender {
@@ -16,18 +19,20 @@ public class HelloSender {
     private final JmsTemplate jmsTemplate;
 
     @Scheduled(fixedRate = 2000)
-    public void sendMessage() {
-        System.out.println("I'm sending a message");
+    public void sendMessage(){
 
-        HelloWorldMessage message =
-            HelloWorldMessage
-            .builder()
-            .id(UUID.randomUUID())
-            .message("Hello world!")
-            .build();
+        System.out.println("I'm Sending a message");
+
+        HelloWorldMessage message = HelloWorldMessage
+                .builder()
+                .id(UUID.randomUUID())
+                .message("Hello World!")
+                .build();
 
         jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE, message);
-        System.out.println("Message sent!");
+
+        System.out.println("Message Sent!");
+
     }
 
 }
